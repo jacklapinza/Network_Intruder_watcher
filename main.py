@@ -30,16 +30,15 @@ ipdict = {
 # Lista dispositivi offline
 offline = []
 
-# Lista dispositivi online
-# Gli elementi in questa lista verrano comparati ai dispositivi online rilevati da nmap.
-online = []
-# Nel caso coincidessero verrà interpretato
-# come un comportamento nella norma. Tutti i dispositivi online sono presenti nel dizionario.
+                        # Lista dispositivi online
+                        # Gli elementi in questa lista verrano comparati ai dispositivi online rilevati da nmap.
+online = []             # Nel caso coincidessero verrà interpretato
+                        # come un comportamento nella norma. Tutti i dispositivi online sono presenti nel dizionario.
 
-# Lista di confronto
-confronto = []  # Questa lista serve per effetuare un confronto tra i dispositivi online trovati da nmap
-# e quelli presenti in dizionario.
-# Nel caso non coincidessero l'ip risultante sara l'indirizzo di un dispositivo non consciuto.
+                        # Lista di confronto
+confronto = []          # Questa lista serve per effetuare un confronto tra i dispositivi online trovati da nmap
+                        # e quelli presenti in dizionario.
+                        # Nel caso non coincidessero l'ip risultante sara l'indirizzo di un dispositivo non consciuto.
 
 
 # Iteazioni logiche per definire quali sono i dispositivi online rilevati da nmap, se sono presenti nel dizionario o meno.
@@ -81,12 +80,11 @@ terzaestrazione = ")"
 
 output_3 = output_2[:output_2.find(terzaestrazione)]
 
-# Il numero che si ottine è il caclolo complessivo
-finale = re.findall('\d+', output_3)
-# dei dispositivi online.
-# Verrà usato in seguito per effetuare un confronto
-# tra la lista online del dizionario e
-# i dispositivi online rilevati da nmap.
+                                        # Il numero che si ottine è il caclolo complessivo
+finale = re.findall('\d+', output_3)    # dei dispositivi online.
+                                        # Verrà usato in seguito per effetuare un confronto
+                                        # tra la lista online del dizionario e
+                                        # i dispositivi online rilevati da nmap.
 
 # ---- FINE
 
