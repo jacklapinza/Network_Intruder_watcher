@@ -53,10 +53,10 @@ Nel caso venisse rilevata una discrepanza, verrà segnalato che è presente un d
 Nuovo dispositivo non presente in dizionario. IP: 192.168.1.*
 ```
 
-L'output finale somiglia al seguente, a seconda dei propri dispositivi connessi e al nome assegnato:
+L'output finale somiglia al seguente, a seconda dei propri dispositivi connessi e al nome assegnato. I dispositivi e gli ip sono puramente illustrativi, per avere lo stesso risultato bisogna costruire il prorpio dizionario personale come illustrato precedentemente. 
 
 
-
+![Output](Output.png)
 
 ## Contribuire
 
@@ -67,10 +67,7 @@ Per questo invito tutti a dare il loro contributo.
 
 ## To do
 
-Aggiornerò questa lista via facendo, riporto di seguito quali sono le migliorie che vorrei apportare:
-* Separazione in un file esterno di tutte le funzioni (Non essenziale)
-* Unione di due funzioni, riportate di seguito, utilizzate unicamente per creare effetti grafici:
-
+Implementare la funzione di aggiunta dei nuovi IP esternalizzando il dizionario su un file esterno. 
 
 ## Licensing
 
