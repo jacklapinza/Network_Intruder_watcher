@@ -58,7 +58,11 @@ finale = output_2[1:4]
 
 conversione = int(finale)
 
-sconosciuto = Diff(ip, confronto)
+sconosciuto = str(Diff(ip, confronto))
+
+sconosciuto2 = sconosciuto[2:]
+
+sconosciuto3 = sconosciuto2[:-2]
 
 
 
@@ -67,5 +71,6 @@ if conversione == len(online):
 else:
     print("Attenzione")
     print(conversione)
+    print("Nuovo dispositivo non presente in dizionario. IP:", colored("{}".format(sconosciuto3), "yellow"))
     
 
