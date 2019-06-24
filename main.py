@@ -31,31 +31,40 @@ ipdict = {
 offline = []
 
 # Lista dispositivi online
-online = [] # Gli elementi in questa lista verrano comparati ai dispositivi online rilevati da nmap. Nel caso coincidessero verrà interpretato
-            # come un comportamento nella norma. Tutti i dispositivi online sono presenti nel dizionario.
+# Gli elementi in questa lista verrano comparati ai dispositivi online rilevati da nmap.
+online = []
+# Nel caso coincidessero verrà interpretato
+# come un comportamento nella norma. Tutti i dispositivi online sono presenti nel dizionario.
 
 # Lista di confronto
-confronto = []  # Questa lista serve per effetuare un confronto tra i dispositivi online trovati da nmap e quelli presenti in dizionario
-                # Nel caso non coincidessero l'ip risultante sara l'indirizzo di un dispositivo non consciuto.
+confronto = []  # Questa lista serve per effetuare un confronto tra i dispositivi online trovati da nmap
+# e quelli presenti in dizionario.
+# Nel caso non coincidessero l'ip risultante sara l'indirizzo di un dispositivo non consciuto.
 
 
 # Iteazioni logiche per definire quali sono i dispositivi online rilevati da nmap, se sono presenti nel dizionario o meno.
 for x in ipdict:
     result = stringa.find(ipdict[x])
     if result == -1:
-        print("Il dispositivo:", colored("{}".format(x), "red"), "risulta", colored("offline", "red"))
+        print("Il dispositivo:", colored("{}".format(x), "red"),
+              "risulta", colored("offline", "red"))
         offline.append(x)
-        ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', stringa )
+        ip = re.findall(r'[0-9]+(?:\.[0-9]+){3}', stringa)
         for x in ip:
             for z in ipdict:
                 if x in ipdict[z]:
-                    confronto.append(x) # Aggiunti alla lista online tutti i dispostivi presenti sia nella stringa nmap che nel dizionario
+                    # Aggiunti alla lista online tutti i dispostivi presenti sia nella stringa nmap che nel dizionario
+                    confronto.append(x)
     else:
-        print ("Il dispositivo:", colored("{}".format(x), "green"), "è", colored("online", "green"), "con l'IP:", colored("{}".format(ipdict[x]), "green"))
-        online.append(x)    # Aggiunta alla lista confronto gli ip dei dispositivi online ma non presenti nel dizionario personale.
+        print("Il dispositivo:", colored("{}".format(x), "green"), "è", colored(
+            "online", "green"), "con l'IP:", colored("{}".format(ipdict[x]), "green"))
+        # Aggiunta alla lista confronto gli ip dei dispositivi online ma non presenti nel dizionario personale.
+        online.append(x)
 
-def Diff(ip, confronto): 
+
+def Diff(ip, confronto):
     return (list(set(ip) - set(confronto)))
+
 
 # Decisamente confusionario. Processo per estrarre il numero totale di dispositivi connessi ---- INIZIO
 primaestrazione = "done:"
@@ -72,9 +81,12 @@ terzaestrazione = ")"
 
 output_3 = output_2[:output_2.find(terzaestrazione)]
 
-finale = re.findall('\d+', output_3)    # Il numero che si ottine è il caclolo complessivo dei dispositivi online
-                                        # Verrà usato in seguito per effetuare un confronto tra la lista online del dizionario e 
-                                        # i dispositivi online rilevati da nmap
+# Il numero che si ottine è il caclolo complessivo
+finale = re.findall('\d+', output_3)
+# dei dispositivi online.
+# Verrà usato in seguito per effetuare un confronto
+# tra la lista online del dizionario e
+# i dispositivi online rilevati da nmap.
 
 # ---- FINE
 
@@ -82,17 +94,16 @@ finale = re.findall('\d+', output_3)    # Il numero che si ottine è il caclolo 
 # Differenze tra la la lista di dispositivi online rilevati internamente e quelli evidenziati da nmap
 sconosciuto = Diff(ip, confronto)
 
-# Iterazione logica per procedere alla visualizzazione. Nel caso il numero dei dispositivi online rilevati da nmap corrisponde al numero
-# totale di elementi presenti nella lista di dipsositivi online, tutto è nella norma perchè non ci sono discrepanze.
-# Nel caso invece il numero fosse diverso, viene visuazlizzato l'IP differente ottentuto dalla comparazione della lista dispositivi online e quella di 
-# confronto. 
+# Iterazione logica per procedere alla visualizzazione. Nel caso il numero dei dispositivi online 
+# rilevati da nmap corrisponde al numero totale di elementi presenti nella lista di dipsositivi online,
+# tutto è nella norma perchè non ci sono discrepanze.
+# Nel caso invece il numero fosse diverso, viene visuazlizzato l'IP differente ottentuto dalla 
+# comparazione della lista dispositivi online e quella di confronto.
 for x in range(len(finale)):
     if int(finale[x]) == len(online):
         print("Tutto nella norma")
     else:
         print("Attenzione")
         for x in range(len(sconosciuto)):
-            print("Nuovo dispositivo non presente in dizionario. IP:", colored("{}".format(sconosciuto[x]), "yellow"))
-    
-
-
+            print("Nuovo dispositivo non presente in dizionario. IP:",
+                  colored("{}".format(sconosciuto[x]), "yellow"))
