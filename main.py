@@ -2,9 +2,10 @@ import os
 import re
 from termcolor import colored
 
+# Lettura stringa da comando nmap. I tempi di attesa si aggirano introno ai 20 secondi.
 stringa = os.popen('nmap -sP 192.168.1.0/24').read()
 
-
+# Dizionario generale di tutti i dispositivi consciuti
 ipdict = {
     "FireTv": "192.168.1.195",
     "S8 Lavoro": "192.168.1.105",
@@ -21,13 +22,24 @@ ipdict = {
     "Fritz!": "192.168.1.172",
     "SmartPlug": "192.168.1.182",
     "Televisore": "192.168.1.160",
-    "Fastgate": "192.168.1.254"
+    "Fastgate": "192.168.1.254",
+    "Kobo": "192.168.1.161",
+    "Ipad": "192.168.1.126"
 }
 
+# Lista dispositivi offline
 offline = []
-online = []
-confronto = []
 
+# Lista dispositivi online
+online = [] # Gli elementi in questa lista verrano comparati ai dispositivi online rilevati da nmap. Nel caso coincidessero verrà interpretato
+            # come un comportamento nella norma. Tutti i dispositivi online sono presenti nel dizionario.
+
+# Lista di confronto
+confronto = []  # Questa lista serve per effetuare un confronto tra i dispositivi online trovati da nmap e quelli presenti in dizionario
+                # Nel caso non coincidessero l'ip risultante sara l'indirizzo di un dispositivo non consciuto.
+
+
+# Iteazioni logiche per definire quali sono i dispositivi online rilevati da nmap, se sono presenti nel dizionario o meno.
 for x in ipdict:
     result = stringa.find(ipdict[x])
     if result == -1:
@@ -37,15 +49,15 @@ for x in ipdict:
         for x in ip:
             for z in ipdict:
                 if x in ipdict[z]:
-                    confronto.append(x)
+                    confronto.append(x) # Aggiunti alla lista online tutti i dispostivi presenti sia nella stringa nmap che nel dizionario
     else:
         print ("Il dispositivo:", colored("{}".format(x), "green"), "è", colored("online", "green"), "con l'IP:", colored("{}".format(ipdict[x]), "green"))
-        online.append(x)
+        online.append(x)    # Aggiunta alla lista confronto gli ip dei dispositivi online ma non presenti nel dizionario personale.
 
 def Diff(ip, confronto): 
     return (list(set(ip) - set(confronto)))
 
-
+# Decisamente confusionario. Processo per estrarre il numero totale di dispositivi connessi ---- INIZIO
 primaestrazione = "done:"
 
 output_1 = stringa[stringa.find(primaestrazione):]
@@ -54,23 +66,33 @@ secondaestrazione = "("
 
 output_2 = output_1[output_1.find(secondaestrazione):]
 
-finale = output_2[1:4]
+print(output_2)
 
-conversione = int(finale)
+terzaestrazione = ")"
 
-sconosciuto = str(Diff(ip, confronto))
+output_3 = output_2[:output_2.find(terzaestrazione)]
 
-sconosciuto2 = sconosciuto[2:]
+finale = re.findall('\d+', output_3)    # Il numero che si ottine è il caclolo complessivo dei dispositivi online
+                                        # Verrà usato in seguito per effetuare un confronto tra la lista online del dizionario e 
+                                        # i dispositivi online rilevati da nmap
 
-sconosciuto3 = sconosciuto2[:-2]
+# ---- FINE
 
 
+# Differenze tra la la lista di dispositivi online rilevati internamente e quelli evidenziati da nmap
+sconosciuto = Diff(ip, confronto)
 
-if conversione == len(online):
-    print("Tutto nella norma")
-else:
-    print("Attenzione")
-    print(conversione)
-    print("Nuovo dispositivo non presente in dizionario. IP:", colored("{}".format(sconosciuto3), "yellow"))
+# Iterazione logica per procedere alla visualizzazione. Nel caso il numero dei dispositivi online rilevati da nmap corrisponde al numero
+# totale di elementi presenti nella lista di dipsositivi online, tutto è nella norma perchè non ci sono discrepanze.
+# Nel caso invece il numero fosse diverso, viene visuazlizzato l'IP differente ottentuto dalla comparazione della lista dispositivi online e quella di 
+# confronto. 
+for x in range(len(finale)):
+    if int(finale[x]) == len(online):
+        print("Tutto nella norma")
+    else:
+        print("Attenzione")
+        for x in range(len(sconosciuto)):
+            print("Nuovo dispositivo non presente in dizionario. IP:", colored("{}".format(sconosciuto[x]), "yellow"))
     
+
 
