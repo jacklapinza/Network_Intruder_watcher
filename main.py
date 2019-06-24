@@ -23,8 +23,7 @@ ipdict = {
     "SmartPlug": "192.168.1.182",
     "Televisore": "192.168.1.160",
     "Fastgate": "192.168.1.254",
-    "Kobo": "192.168.1.161",
-    "Ipad": "192.168.1.126"
+    "Kobo": "192.168.1.161"
 }
 
 # Lista dispositivi offline
