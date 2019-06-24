@@ -5,7 +5,9 @@ from termcolor import colored
 # Lettura stringa da comando nmap. I tempi di attesa si aggirano introno ai 20 secondi.
 stringa = os.popen('nmap -sP 192.168.1.0/24').read()
 
-# Dizionario generale di tutti i dispositivi consciuti
+# Dizionario generale di tutti i dispositivi consciuti.
+# Questo dizionario va modificato a seconda dei propri dispositivi
+# ed è puramente illustrativo.
 ipdict = {
     "FireTv": "192.168.1.195",
     "S8 Lavoro": "192.168.1.105",
