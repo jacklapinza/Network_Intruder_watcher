@@ -1,6 +1,7 @@
 import os
 import re
 from termcolor import colored
+import notify2
 
 # Lettura stringa da comando nmap. I tempi di attesa si aggirano introno ai 20 secondi.
 stringa = os.popen('nmap -sP 192.168.1.0/24').read()
@@ -99,11 +100,25 @@ sconosciuto = Diff(ip, confronto)
 # tutto è nella norma perchè non ci sono discrepanze.
 # Nel caso invece il numero fosse diverso, viene visuazlizzato l'IP differente ottentuto dalla 
 # comparazione della lista dispositivi online e quella di confronto.
+
+norma = ""
+
 for x in range(len(finale)):
     if int(finale[x]) == len(online):
         print("Tutto nella norma")
+        norma = "Norma"
     else:
         print("Attenzione")
         for x in range(len(sconosciuto)):
             print("Nuovo dispositivo non presente in dizionario. IP:",
                   colored("{}".format(sconosciuto[x]), "yellow"))
+
+
+if norma == "Norma":
+    notify2.init("")
+    n = notify2.Notification('Nmap', 'OK')
+    n.show()
+else:
+    notify2.init("")
+    n = notify2.Notification('Nmap', 'ATTENZIONE')
+    n.show()
