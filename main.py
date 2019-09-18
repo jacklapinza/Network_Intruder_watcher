@@ -1,7 +1,6 @@
 import os
 import re
 from termcolor import colored
-import notify2
 
 # Lettura stringa da comando nmap. I tempi di attesa si aggirano introno ai 20 secondi.
 stringa = os.popen('nmap -sP 192.168.1.0/24').read()
@@ -10,13 +9,13 @@ stringa = os.popen('nmap -sP 192.168.1.0/24').read()
 # Questo dizionario va modificato a seconda dei propri dispositivi
 # ed è puramente illustrativo.
 ipdict = {
-    "FireTv": "192.168.1.195",
+    "FireTv": "192.168.1.110",
     "S8 Lavoro": "192.168.1.105",
-    "Macbook": "192.168.1.196",
+    "Macbook": "192.168.1.195",
     "Switch": "192.168.1.158",
     "Ipcam1": "192.168.1.136",
     "Ipcam2": "192.168.1.147",
-    "Echo": "192.168.1.122",
+    "Echo": "192.168.1.142",
     "HubHue": "192.168.1.149",
     "DesktopPC": "192.168.1.145",
     "Stampante": "192.168.1.173",
@@ -27,7 +26,8 @@ ipdict = {
     "Televisore": "192.168.1.160",
     "Fastgate": "192.168.1.254",
     "Kobo": "192.168.1.161",
-    "Ipad": "192.168.1.126"
+    "Ipad": "192.168.1.126",
+    "PS4": "192.168.1.137"
 }
 
 # Lista dispositivi offline
@@ -113,12 +113,3 @@ for x in range(len(finale)):
             print("Nuovo dispositivo non presente in dizionario. IP:",
                   colored("{}".format(sconosciuto[x]), "yellow"))
 
-
-if norma == "Norma":
-    notify2.init("")
-    n = notify2.Notification('Nmap', 'OK')
-    n.show()
-else:
-    notify2.init("")
-    n = notify2.Notification('Nmap', 'ATTENZIONE')
-    n.show()
