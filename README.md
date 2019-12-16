@@ -33,7 +33,7 @@ Il comando che verrà eseguito dallo script è il seguente:
 ```bash
 nmap -sP 192.168.1.0/24
 ```
-Verrà quindi eseguiti una scansione rapida di tutti i dispositivi connessi alla rete e online.
+Verrà quindi eseguita una scansione rapida di tutti i dispositivi connessi alla rete e online.
 
 ## Costruzione dizionario
 
