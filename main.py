@@ -10,6 +10,7 @@ stringa = os.popen('nmap -sP 192.168.1.0/24').read()
 # ed è puramente illustrativo.
 ipdict = {
     "FireTv_2°": "192.168.1.245",
+    "FireTv_1°": "192.168.1.135",
     "Macbook": "192.168.1.238",
     "Switch": "192.168.1.199",
     "Ipcam1": "192.168.1.136",
@@ -22,10 +23,11 @@ ipdict = {
     "Note9": "192.168.1.87",
     "Fritz!": "192.168.1.172",
     "SmartPlug": "192.168.1.182",
-    "Televisore": "192.168.1.160",
+    "Televisore": "192.168.1.235",
     "Fastgate": "192.168.1.254",
     "Kobo": "192.168.1.161",
     "Ipad": "192.168.1.126",
+    "Computer Lavoro": "192.168.1.121",
     "PS4": "192.168.1.137"
 }
 
