@@ -9,18 +9,17 @@ stringa = os.popen('nmap -sP 192.168.1.0/24').read()
 # Questo dizionario va modificato a seconda dei propri dispositivi
 # ed è puramente illustrativo.
 ipdict = {
-    "FireTv": "192.168.1.110",
-    "S8 Lavoro": "192.168.1.105",
-    "Macbook": "192.168.1.195",
+    "FireTv_2°": "192.168.1.245",
+    "Macbook": "192.168.1.238",
     "Switch": "192.168.1.158",
     "Ipcam1": "192.168.1.136",
     "Ipcam2": "192.168.1.147",
     "Echo": "192.168.1.142",
-    "HubHue": "192.168.1.149",
+    "HubHue": "192.168.1.191",
     "DesktopPC": "192.168.1.145",
     "Stampante": "192.168.1.173",
     "Thosiba": "192.168.1.107",
-    "Note9": "192.168.1.156",
+    "Note9": "92.168.1.87",
     "Fritz!": "192.168.1.172",
     "SmartPlug": "192.168.1.182",
     "Televisore": "192.168.1.160",
